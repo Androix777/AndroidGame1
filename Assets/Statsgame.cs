@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Statsgame  {
-    public static float speed=0.1f;
+    private static float speed=0.3f;
 
+
+
+
+    public static float Getspeed() { return speed; }
+    public static void Setspeed(float s) { speed = s; }
 }
