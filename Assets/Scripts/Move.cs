@@ -43,4 +43,10 @@ public class Move : MonoBehaviour {
 
 
     }
+
+    private void OnDestroy()
+    {
+        Application.LoadLevel(0);
+    }
+
 }

@@ -12,7 +12,7 @@ public class Moveroom : MonoBehaviour {
     private void FixedUpdate()
     {
         if (transform.position.x <=0 & b) { gener.GetComponent<Generationroom>().Endroom(); b = false; }
-        if (transform.position.x <= -5.8f) { Destroy(gameObject, 0); }
+        if (transform.position.x <= -45f) { Destroy(gameObject, 0); }
         transform.Translate(Vector3.left * Statsgame.Getspeed() * Time.deltaTime);
     }
     

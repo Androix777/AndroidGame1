@@ -6,7 +6,7 @@ public class Generationroom : MonoBehaviour {
     public GameObject[] rooms;
 	// Use this for initialization
 	void Start () {
-		
+        Endroom();
 	}
 	
 	// Update is called once per frame
@@ -15,7 +15,7 @@ public class Generationroom : MonoBehaviour {
 	}
     //7.2 0 5.4
     public void Endroom() {
-       GameObject g= Instantiate(rooms[Random.RandomRange(0,rooms.Length)], new Vector3(7.2f, 0, 0), transform.rotation) as GameObject;
+       GameObject g= Instantiate(rooms[Random.RandomRange(0,rooms.Length)], new Vector3(90, 0, 0), transform.rotation) as GameObject;
     }
 
 }
