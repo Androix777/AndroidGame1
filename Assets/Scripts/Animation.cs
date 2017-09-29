@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Animation : MonoBehaviour {
     public float maxrotaion, minrotation,speed,dist;
-    public enum anim {rotationtodo,rotation360,Backandforth }
+    public enum anim {rotationtodo,rotation360,Backandforth , Move }
     public anim type;
-    public Vector3 first, second;
-    Vector3 direction;
+    public Vector3[] point;
+    Vector3 direction,pos;
     float angle, anglestart;
-    bool select;
+    int numberpoint;
 	// Use this for initialization
 	void Start () {
         anglestart = transform.rotation.eulerAngles.z;
-        direction = Vector3.Normalize(first - transform.localPosition) ;
-        select = true;
+        if (type == anim.Move & point.Length>0) {
+            direction = Vector3.Normalize(point[0] - transform.localPosition);
+            numberpoint = 0; }
         
     }
     
@@ -23,25 +24,17 @@ public class Animation : MonoBehaviour {
  
         switch (type)
         {
-            case anim.Backandforth:
+            case anim.Move:
                
-                if (select & Vector3.Distance(transform.localPosition, first) > dist)
+                if (Vector3.Distance(transform.localPosition, point[numberpoint]) > dist)
                 {
-                    direction = Vector3.Normalize(first - transform.localPosition);
+                    direction = Vector3.Normalize(point[numberpoint] - transform.localPosition);
                 }
-                else { if (Vector3.Distance(transform.localPosition, first) < dist) select = false; }
-
-                if (!select & Vector3.Distance(transform.localPosition, second) > dist)
-                {
-                    direction = Vector3.Normalize(second - transform.localPosition);
-                }
-                else
-                {
-                    if (Vector3.Distance(transform.localPosition, second) < dist) select = true;
-                }
-                    transform.localPosition = Vector3.Lerp(transform.localPosition, transform.localPosition + (direction * speed), 1);
-                    
+                else { if (Vector3.Distance(transform.localPosition, point[numberpoint]) < dist) numberpoint++; }
+                if (numberpoint == point.Length) numberpoint = 0;
+                transform.localPosition = Vector3.Lerp(transform.localPosition, transform.localPosition + (direction * speed), 1);                  
                 break;
+
 
             case anim.rotation360:
                 transform.rotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z+speed);
