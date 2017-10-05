@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Animation : MonoBehaviour {
-    public float maxrotaion, minrotation,speed,dist;
-    public enum anim {rotationtodo,rotation360,Backandforth , Move }
+    public float maxrotaion, minrotation,speed,dist,maxscale,minscale;
+    public enum anim {rotationtodo,rotation360,Scale , Move }
     public anim type;
     public Vector3[] point;
     Vector3 direction,pos;
@@ -53,6 +53,23 @@ public class Animation : MonoBehaviour {
                     }
                     
                     speed = -speed; }                
+                break;
+
+            case anim.Scale:
+                if (minscale <= transform.localScale.x && maxscale >= transform.localScale.x) { transform.localScale = new Vector3(transform.localScale.x+ (speed / 100), transform.localScale.y+(speed/100), transform.localScale.z );  }
+                else {
+                   
+                    if (minscale <= transform.localScale.x)
+                    {
+                        transform.localScale = new Vector3(maxscale, maxscale, transform.localScale.z);
+                        
+                    }
+                    else {
+                        transform.localScale = new Vector3(minscale, minscale, transform.localScale.z);
+
+                    }
+                    
+                    speed = -speed; }
                 break;
             
         }	
