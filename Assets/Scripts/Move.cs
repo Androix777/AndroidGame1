@@ -18,6 +18,7 @@ public class Move : MonoBehaviour {
     }
     private void Update()
     {
+        UI.GetComponent<Text>().text =""+ Statsgame.Getscore();
         if (s < Input.touchCount)
         {
             Vector3 touchPosition = new Vector3(Input.GetTouch(Input.touchCount - 1).position.x, Input.GetTouch(Input.touchCount - 1).position.y, 0);
@@ -64,7 +65,9 @@ public class Move : MonoBehaviour {
 
     private void OnDestroy()
     {
+        Statsgame.Setscore(0);
         SceneManager.LoadScene(0);
+
     }
     void Newgradtail()
     {

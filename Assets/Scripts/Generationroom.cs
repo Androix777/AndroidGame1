@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Generationroom : MonoBehaviour {
     public string[] rooms;
@@ -16,8 +17,8 @@ public class Generationroom : MonoBehaviour {
     private void FixedUpdate()
     {
         i = i + speedup;
-        
-        Statsgame.Setspeed(Mathf.Sqrt(i/2));
+        Statsgame.Setscore(Statsgame.Getscore()+i/10);
+        Statsgame.Setspeed(Mathf.Sqrt(i));
     }
     
     public void Endroom() {
