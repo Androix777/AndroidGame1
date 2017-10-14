@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tail : MonoBehaviour {
-    GameObject hero;
     Vector3 pos;
     bool t;
     public float dist,speed;
 	// Use this for initialization
 	void Start () {
-        hero = GameObject.FindGameObjectWithTag("Hero");
+       
 	}
 	
 	// Update is called once per frame

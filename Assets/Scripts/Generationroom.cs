@@ -23,7 +23,7 @@ public class Generationroom : MonoBehaviour {
     }
     
     public void Endroom() {
-        if (rooms.Length>0) { GameObject g = Instantiate(Resources.Load(rooms[Random.RandomRange(0, rooms.Length)]), new Vector3(100, 0, 0), transform.rotation) as GameObject; }
+        if (rooms.Length>0) {Instantiate(Resources.Load(rooms[Random.Range(0, rooms.Length)]), new Vector3(100, 0, 0), transform.rotation); }
     }
 
 }
