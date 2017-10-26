@@ -25,12 +25,12 @@ public class Generationroom : MonoBehaviour {
     
     public void Createroom(string room)
     {if (room != "Random") {
-            Instantiate(Resources.Load(room), new Vector3(80, 0, 0), transform.rotation); }
+            Instantiate(Resources.Load(room), new Vector3(45, 0, 0), transform.rotation); }
         else
         {
             if (rooms.Length > 0)
             {
-                Instantiate(Resources.Load(rooms[Random.Range(0, rooms.Length)]), new Vector3(80, 0, 0), transform.rotation);  }
+                Instantiate(Resources.Load(rooms[Random.Range(0, rooms.Length)]), new Vector3(45, 0, 0), transform.rotation);  }
         }
     }
 }

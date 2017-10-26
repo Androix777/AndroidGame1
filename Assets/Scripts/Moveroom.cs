@@ -12,7 +12,7 @@ public class Moveroom : MonoBehaviour {
 	}
     private void FixedUpdate()
     {
-        if (transform.position.x <=60 & b) { gener.GetComponent<Generationroom>().Createroom(nextroom); b = false; }
+        if (transform.position.x <=25 & b) { gener.GetComponent<Generationroom>().Createroom(nextroom); b = false; }
         if (transform.position.x <= -60f) { Destroy(gameObject, 0); }
         transform.Translate(Vector3.left * Statsgame.Getspeed() * Time.deltaTime);
     }
