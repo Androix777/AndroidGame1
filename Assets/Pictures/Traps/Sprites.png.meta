@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2246633d4f4fb974cb9655fc09e5d603
-timeCreated: 1507971516
+timeCreated: 1509615770
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -15,6 +15,8 @@ TextureImporter:
     21300016: trap9
     21300018: trap7
     21300020: trap11
+    21300022: circle
+    21300024: line
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -97,7 +99,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trap5
+      name: circle
       rect:
         serializedVersion: 2
         x: 0
@@ -110,102 +112,11 @@ TextureImporter:
       outline: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: trap3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 501
-        width: 499
-        height: 500
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: trap6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1002
-        width: 499
-        height: 500
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: trap4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1503
-        width: 499
-        height: 500
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: trap1
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 501
-        width: 498
-        height: 500
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: trap2
+      name: line
       rect:
         serializedVersion: 2
         x: 501
         y: 0
-        width: 500
-        height: 477
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: trap8
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 1002
-        width: 500
-        height: 201
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: trap10
-      rect:
-        serializedVersion: 2
-        x: 999
-        y: 478
-        width: 131
-        height: 500
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: trap11
-      rect:
-        serializedVersion: 2
-        x: 1001
-        y: 979
         width: 66
         height: 500
       alignment: 9
