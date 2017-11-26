@@ -5,13 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 public class MoveHero : MonoBehaviour {
-    public float speed,dist;
+    public float speed,dist,second;
     private int s;
     private Vector3 newPosition,undoposition;
     public GameObject UI,tail;
     private string st;
     GradientAlphaKey[] tails;
-
+    bool blocked = true;
+    RaycastHit2D hit;
     void Start () {
         newPosition = transform.position;
         Gradient g = tail.GetComponent<LineRenderer>().colorGradient;
@@ -20,8 +21,10 @@ public class MoveHero : MonoBehaviour {
     }
     private void Update()
     {
+        
+    
         if (UI != null) { UI.GetComponent<Text>().text = "" + Statsgame.Getscore(); }
-        if (s < Input.touchCount)
+        if (s < Input.touchCount& blocked)
         {
             Vector3 touchPosition = new Vector3(Input.GetTouch(Input.touchCount - 1).position.x, Input.GetTouch(Input.touchCount - 1).position.y, 0);
             newPosition = Camera.main.ScreenToWorldPoint(touchPosition);
@@ -30,29 +33,40 @@ public class MoveHero : MonoBehaviour {
             Backalpha();
            
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0)& blocked)
         {
             Vector3 MousePos = Input.mousePosition;
             newPosition = Camera.main.ScreenToWorldPoint(MousePos);
             newPosition = new Vector3(newPosition.x, newPosition.y, 0);
             undoposition = gameObject.transform.position;
             Backalpha();
-       
+            
 
         }
-
-         RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y , 0), newPosition - transform.position, Vector3.Distance(transform.position, newPosition));
-         Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 0), newPosition - transform.position);
-         if (hit.collider != null)
+        if (blocked) {
+            hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y, 0), newPosition - transform.position, Vector3.Distance(transform.position, newPosition));
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 0), newPosition - transform.position);
+        }
+         if (hit.collider != null || !blocked)
          {
             Debug.Log(hit.point);
-            transform.Translate(new Vector3(hit.point.x, hit.point.y, 0) - transform.position);
+            GameObject g = GameObject.FindGameObjectWithTag("Generator");
+            g.GetComponent<Generationroom>().speedroom = 0;
+            g.GetComponent<Generationroom>().speedup = 0;
+            newPosition = hit.point;
+            transform.DOLocalMove(newPosition,300/second).SetSpeedBased().SetEase(Ease.Linear);
+           
+            blocked = false;
+
         }
          else
          {
-             transform.position = newPosition;
-         }
-       //  transform.DOLocalMove(newPosition,100).SetSpeedBased().SetEase(Ease.Linear); ;
+            transform.DOLocalMove(newPosition, 300).SetSpeedBased().SetEase(Ease.Linear);
+            //transform.position = newPosition;
+        }
+        // transform.DOLocalMove(newPosition,100).SetSpeedBased().SetEase(Ease.Linear); 
+        tail.GetComponent<LineRenderer>().SetPosition(1, transform.position);
+        tail.GetComponent<LineRenderer>().SetPosition(0, undoposition);
         s = Input.touchCount;
     }
     // Update is called once per frame
@@ -62,8 +76,8 @@ public class MoveHero : MonoBehaviour {
 
         newPosition=new Vector3(newPosition.x - (1* Statsgame.Getspeed() * Time.deltaTime),newPosition.y,0);
         undoposition= new Vector3(undoposition.x - (1 * Statsgame.Getspeed() * Time.deltaTime), undoposition.y, 0);
-        tail.GetComponent<LineRenderer>().SetPosition(1,newPosition);
-        tail.GetComponent<LineRenderer>().SetPosition(0, undoposition);
+       // tail.GetComponent<LineRenderer>().SetPosition(1,transform.position);
+       // tail.GetComponent<LineRenderer>().SetPosition(0, undoposition);
         Newgradtail();
 
         
