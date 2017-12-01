@@ -19,7 +19,7 @@ public class Generationroom : MonoBehaviour {
     {
 		speedroom = speedroom + speedup;
 		Statsgame.Setscore(Statsgame.Getscore()+speedroom/10);
-		Statsgame.Setspeed(Mathf.Sqrt(speedroom));
+		Statsgame.Setspeed(speedroom);
     }
     
     

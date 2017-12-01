@@ -16,6 +16,7 @@ public class Tween : MonoBehaviour {
 
 
 	void Start () {
+        speed = speed * Statsgame.Getspeed();
 		DOTween.Init ();
 		switch (type)
 		{
