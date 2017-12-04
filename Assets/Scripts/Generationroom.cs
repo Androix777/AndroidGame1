@@ -10,6 +10,7 @@ public class Generationroom : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        speedroom = Statsgame.Getspeed();
         Createroom("Random");
         // i = 1;
         
