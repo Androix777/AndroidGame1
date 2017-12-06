@@ -9,7 +9,13 @@ public class Moveroom : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gener = GameObject.FindGameObjectWithTag("Generator");
-	}
+        GameObject r = gener.GetComponent<Generationroom>().Lastroomget() ;
+      if (r != null)
+        {
+            transform.position = r.transform.position + new Vector3(20,0, 0);
+        }
+        gener.GetComponent<Generationroom>().Lastroomset(gameObject);
+    }
     private void FixedUpdate()
     {
         if (transform.position.x <=25 & b) { gener.GetComponent<Generationroom>().Createroom(nextroom); b = false; }

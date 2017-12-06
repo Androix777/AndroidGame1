@@ -7,10 +7,12 @@ public class Generationroom : MonoBehaviour {
     public string[] rooms;
     public float speedroom;
     public float speedup;
-
+    public bool usespeedofthisscript;
+    GameObject Lastrom;
 	// Use this for initialization
 	void Start () {
-        speedroom = Statsgame.Getspeed();
+        if (!usespeedofthisscript) {
+            speedroom = Statsgame.Getspeed(); }
         Createroom("Random");
         // i = 1;
         
@@ -34,4 +36,6 @@ public class Generationroom : MonoBehaviour {
                 Instantiate(Resources.Load(rooms[Random.Range(0, rooms.Length)]), new Vector3(45, 0, 0), transform.rotation);  }
         }
     }
+    public void Lastroomset(GameObject r) { Lastrom = r; }
+    public GameObject Lastroomget() {  return Lastrom; }
 }
