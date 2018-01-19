@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Moveroom : MonoBehaviour {
     public GameObject gener;
+    public float speed,speedget;
     bool b=true;
     public string nextroom;
 	// Use this for initialization
@@ -12,7 +13,7 @@ public class Moveroom : MonoBehaviour {
         GameObject r = gener.GetComponent<Generationroom>().Lastroomget() ;
       if (r != null)
         {
-            transform.position = r.transform.position + new Vector3(20,0, 0);
+            transform.position = r.transform.position + new Vector3(21,0, 0);
         }
         gener.GetComponent<Generationroom>().Lastroomset(gameObject);
     }
@@ -20,7 +21,9 @@ public class Moveroom : MonoBehaviour {
     {
         if (transform.position.x <=25 & b) { gener.GetComponent<Generationroom>().Createroom(nextroom); b = false; }
         if (transform.position.x <= -60f) { Destroy(gameObject, 0); }
-        transform.Translate(Vector3.left * Statsgame.Getspeed() * Time.deltaTime);
+        speedget = Statsgame.Getspeed();
+        speed = Vector3.left.x * Statsgame.Getspeed() * Time.deltaTime;
+        transform.Translate(Vector3.left * Statsgame.Getspeed() *Time.deltaTime);
     }
     
 }
