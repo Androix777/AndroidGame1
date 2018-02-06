@@ -7,13 +7,20 @@ public class Generationroom : MonoBehaviour {
     public string[] rooms;
     public float speedroom;
     public float speedup;
-    public bool usespeedofthisscript;
+    public bool TestMode;
     GameObject Lastrom;
 	// Use this for initialization
-	void Start () {
-        if (!usespeedofthisscript) {
-            speedroom = Statsgame.Getspeed(); }
-        Createroom("Random");
+	void Awake () {
+        if (TestMode) {
+            // speedroom = Statsgame.Getspeed();
+            Statsgame.Setspeed(speedroom);
+            Statsgame.SetTestMode(true);
+        }
+        else { Createroom("Random");
+            if (Statsgame.Getspeed() == 1) { Statsgame.Setspeed(speedroom); }
+            Statsgame.SetTestMode(false);
+        }
+        
         // i = 1;
         
 	}

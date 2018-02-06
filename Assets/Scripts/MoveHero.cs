@@ -13,6 +13,7 @@ public class MoveHero : MonoBehaviour {
     GradientAlphaKey[] tails;
     bool blocked = true;
     RaycastHit2D hit;
+    bool dead;
     void Start () {
         newPosition = transform.position;
         Gradient g = tail.GetComponent<LineRenderer>().colorGradient;
@@ -55,7 +56,7 @@ public class MoveHero : MonoBehaviour {
             g.GetComponent<Generationroom>().speedup = 0;
             newPosition = hit.point;
             transform.DOLocalMove(newPosition,300/second).SetSpeedBased().SetEase(Ease.Linear);
-           
+            DOTween.Pause("It is a trap");
             blocked = false;
 
         }
@@ -70,9 +71,11 @@ public class MoveHero : MonoBehaviour {
         s = Input.touchCount;
     }
     // Update is called once per frame
-    void FixedUpdate() {        
-      
-
+    void FixedUpdate() {
+       /* if (blocked == false)
+        {
+            transform.Translate(Vector3.Normalize(newPosition-transform.position));
+        }*/
 
         newPosition=new Vector3(newPosition.x - (1* Statsgame.Getspeed() * Time.deltaTime),newPosition.y,0);
         undoposition= new Vector3(undoposition.x - (1 * Statsgame.Getspeed() * Time.deltaTime), undoposition.y, 0);

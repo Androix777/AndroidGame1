@@ -4,8 +4,10 @@ using UnityEngine;
 
 public static class Statsgame  {
     private static float speed=1f,score,money;
+    static bool TestMode;
 
-
+    public static void SetTestMode (bool TestMod){ TestMode = TestMod; }
+    public static bool GetTestMode() { return TestMode; }
     public static float Getmoney() { return money; }
     public static void Setmoney(float s) { money = s; }
 

@@ -16,7 +16,7 @@ public class Tween : MonoBehaviour {
 
 
 	void Start () {
-        speed = speed * Statsgame.Getspeed()* Time.deltaTime;
+        speed = speed * Statsgame.Getspeed()  / 100;
 		DOTween.Init ();
 		switch (type)
 		{
@@ -28,14 +28,14 @@ public class Tween : MonoBehaviour {
 				if (loopRestart) {myLoopType = LoopType.Restart;}
 				myPathType = PathType.Linear;
 				if (curvedPath) {myPathType = PathType.CatmullRom;}
-				transform.DOLocalPath (points, speed, myPathType, PathMode.Ignore).SetSpeedBased().SetLoops(-1, myLoopType).SetEase(Ease.Linear);
+				transform.DOLocalPath (points, speed, myPathType, PathMode.Ignore).SetSpeedBased().SetLoops(-1, myLoopType).SetEase(Ease.Linear).SetId("It is a trap");
 			}                
 			break;
 
 		case anim.Rotate:
 			myLoopType = LoopType.Yoyo;
 			if (loopRestart) {myLoopType = LoopType.Restart;}
-			transform.DOLocalRotate (rotateVector, speed, RotateMode.FastBeyond360).SetSpeedBased().SetLoops(-1, myLoopType).SetEase(Ease.Linear);
+			transform.DOLocalRotate (rotateVector, speed, RotateMode.FastBeyond360).SetSpeedBased().SetLoops(-1, myLoopType).SetEase(Ease.Linear).SetId("It is a trap");
 			break;
 
 		case anim.Scale:
@@ -44,7 +44,7 @@ public class Tween : MonoBehaviour {
 			if (loopRestart) {myLoopType = LoopType.Restart;}
 			myPathType = PathType.Linear;
 			if (curvedPath) {myPathType = PathType.CatmullRom;}
-			transform.DOScale (scaleVector, speed).SetSpeedBased().SetLoops(-1, myLoopType).SetEase(Ease.Linear);              
+			transform.DOScale (scaleVector, speed).SetSpeedBased().SetLoops(-1, myLoopType).SetEase(Ease.Linear).SetId("It is a trap");              
 			break;
 		}
     }
