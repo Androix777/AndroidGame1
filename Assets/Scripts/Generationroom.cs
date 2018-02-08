@@ -18,6 +18,7 @@ public class Generationroom : MonoBehaviour {
         }
         else { Createroom("Random");
             if (Statsgame.Getspeed() == 1) { Statsgame.Setspeed(speedroom); }
+            else { speedroom = Statsgame.Getspeed(); }
             Statsgame.SetTestMode(false);
         }
         
