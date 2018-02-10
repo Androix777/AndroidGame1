@@ -10,7 +10,7 @@ public class Trap : MonoBehaviour {
 	}
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag=="Hero") Destroy(collision.gameObject, 0);
+        if (collision.tag == "Hero") { collision.GetComponent<MoveHero>().kill(); collision.gameObject.SetActive(false); Destroy(collision.gameObject,1); };
     }
     // Update is called once per frame
     void Update () {

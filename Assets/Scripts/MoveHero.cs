@@ -8,7 +8,7 @@ public class MoveHero : MonoBehaviour {
     public float speed,dist,second;
     private int s;
     private Vector3 newPosition,undoposition;
-    public GameObject UI,tail;
+    public GameObject UI,tail,explosion;
     private string st;
     GradientAlphaKey[] tails;
     bool blocked = true;
@@ -107,5 +107,8 @@ public class MoveHero : MonoBehaviour {
         Gradient g = tail.GetComponent<LineRenderer>().colorGradient;
         g.alphaKeys = tails;
         tail.GetComponent<LineRenderer>().colorGradient = g;
+    }
+  public void kill() {
+        Instantiate(explosion,transform.position,transform.rotation);        
     }
 }
