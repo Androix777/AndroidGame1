@@ -36,12 +36,20 @@ public class Generationroom : MonoBehaviour {
     
     public void Createroom(string room)
     {if (room != "Random") {
-            Instantiate(Resources.Load(room), new Vector3(45, 0, 0), transform.rotation); }
+        
+        GameObject newroom = Instantiate(Resources.Load(room), new Vector3(45, 0, 0), transform.rotation)as GameObject; 
+        
+        
+        }
         else
         {
             if (rooms.Length > 0)
-            {
-                Instantiate(Resources.Load(rooms[Random.Range(0, rooms.Length)]), new Vector3(45, 0, 0), transform.rotation);  }
+            {int x=0,y=0;
+               GameObject newroom = Instantiate(Resources.Load(rooms[Random.Range(0, rooms.Length)]), new Vector3(45, 0, 0), transform.rotation)as GameObject; 
+                if (Random.RandomRange(0,100)>50){x=180;}
+        if (Random.RandomRange(0,100)>50){y=180;}
+        newroom.transform.rotation=Quaternion.Euler(x,y,0);
+                }
         }
     }
     public void Lastroomset(GameObject r) { Lastrom = r; }

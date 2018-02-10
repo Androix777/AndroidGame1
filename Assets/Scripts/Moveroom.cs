@@ -27,7 +27,7 @@ public class Moveroom : MonoBehaviour {
         if (transform.position.x <= -60f) { Destroy(gameObject, 0); }      
         speedget = Statsgame.Getspeed();
         speed = Vector3.left.x * Statsgame.Getspeed() * Time.deltaTime;
-        transform.Translate(Vector3.left * Statsgame.Getspeed() * Time.deltaTime); }
+        transform.Translate(Vector3.left * Statsgame.Getspeed() * Time.deltaTime,Space.World); }
     }
     
 }
