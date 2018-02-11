@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Generationroom : MonoBehaviour {
     public string[] rooms;
     public float speedroom;
@@ -11,6 +12,9 @@ public class Generationroom : MonoBehaviour {
     GameObject Lastrom;
 	// Use this for initialization
 	void Awake () {
+        //Debug.Log(Resources.LoadAll("Assets/Resources/1").Length);
+        
+        
         RoomData.avgRoomAdd(1);
         if (TestMode) {
             // speedroom = Statsgame.Getspeed();
@@ -145,9 +149,10 @@ static class RoomData {
     
     static public string convertNum(int num ){
         int i=1;
-        while (num/10>=1){
+        int nums=num;
+        while (nums/10>=1){
             i++;
-            num/=10;
+            nums/=10;
         }
         string ret="room-";
         for (int j=0;j<4-i;j++){
