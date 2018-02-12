@@ -50,37 +50,28 @@ public class MoveHero : MonoBehaviour {
         }
          if (hit.collider != null || !blocked)
          {
-            Debug.Log(hit.point);
             GameObject g = GameObject.FindGameObjectWithTag("Generator");
-            g.GetComponent<Generationroom>().speedroom = 0;
-            g.GetComponent<Generationroom>().speedup = 0;
+            g.GetComponent<Generationroom>().StopAll();          
             newPosition = hit.point;
-            transform.DOLocalMove(newPosition,300/second).SetSpeedBased().SetEase(Ease.Linear);
-            DOTween.Pause("It is a trap");
+            transform.DOLocalMove(newPosition,300/second).SetSpeedBased().SetEase(Ease.Linear);           
             blocked = false;
-
         }
          else
          {
             transform.DOLocalMove(newPosition, 300).SetSpeedBased().SetEase(Ease.Linear);
-            //transform.position = newPosition;
+           
         }
-        // transform.DOLocalMove(newPosition,100).SetSpeedBased().SetEase(Ease.Linear); 
         tail.GetComponent<LineRenderer>().SetPosition(1, transform.position);
         tail.GetComponent<LineRenderer>().SetPosition(0, undoposition);
         s = Input.touchCount;
     }
     // Update is called once per frame
     void FixedUpdate() {
-       /* if (blocked == false)
-        {
-            transform.Translate(Vector3.Normalize(newPosition-transform.position));
-        }*/
+       
 
         newPosition=new Vector3(newPosition.x - (1* Statsgame.Getspeed() * Time.deltaTime),newPosition.y,0);
         undoposition= new Vector3(undoposition.x - (1 * Statsgame.Getspeed() * Time.deltaTime), undoposition.y, 0);
-       // tail.GetComponent<LineRenderer>().SetPosition(1,transform.position);
-       // tail.GetComponent<LineRenderer>().SetPosition(0, undoposition);
+       
         Newgradtail();
 
         
@@ -109,6 +100,8 @@ public class MoveHero : MonoBehaviour {
         tail.GetComponent<LineRenderer>().colorGradient = g;
     }
   public void kill() {
-        Instantiate(explosion,transform.position,transform.rotation);        
+        Instantiate(explosion,transform.position,transform.rotation);
+        GameObject g = GameObject.FindGameObjectWithTag("Generator");
+        g.GetComponent<Generationroom>().StopAll();    
     }
 }

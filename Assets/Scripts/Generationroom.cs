@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 
 public class Generationroom : MonoBehaviour {
     public string[] rooms;
@@ -60,6 +60,13 @@ public class Generationroom : MonoBehaviour {
     }
     public void Lastroomset(GameObject r) { Lastrom = r; }
     public GameObject Lastroomget() {  return Lastrom; }
+
+    public void StopAll(){           
+            speedroom = 0;
+            speedup = 0;
+            DOTween.Pause("It is a trap");         
+    }
+
 }
 
 static class RoomData {
@@ -161,4 +168,5 @@ static class RoomData {
         
         return ret+num.ToString();
     }
+
 }
