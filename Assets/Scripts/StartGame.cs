@@ -18,7 +18,12 @@ public class StartGame : MonoBehaviour {
 
     }
     public void Startgame() {
-        Statsgame.Setspeed (gameObject.GetComponent<Slider>().value * maxstartspeed);
+        //Statsgame.Setspeed (gameObject.GetComponent<Slider>().value * maxstartspeed);
+
+        Statsgame.Setavg(gameObject.GetComponent<Slider>().value * maxstartspeed);
+        Statsgame.Setmindif(gameObject.GetComponent<Slider>().value * maxstartspeed);
+        Statsgame.Setmaxdif(gameObject.GetComponent<Slider>().value * maxstartspeed);
+
         SceneManager.LoadScene(1);
        
 

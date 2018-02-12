@@ -6,18 +6,22 @@ using DG.Tweening;
 
 public class Generationroom : MonoBehaviour {
     public string[] rooms;
+    public int avg,minDif,maxDif;
     public float speedroom;
     public float speedup;
     public bool TestMode;
     GameObject Lastrom;
 	// Use this for initialization
 	void Awake () {
-        //Debug.Log(Resources.LoadAll("Assets/Resources/1").Length);
+        if (Statsgame.Getavg()!=-1){avg=Statsgame.Getavg();}
+        if (Statsgame.Getmindif()!=-1){minDif=Statsgame.Getmindif();}
+        if (Statsgame.Getmaxdif()!=-1){maxDif=Statsgame.Getmaxdif();}
+        RoomData.Setdif(minDif,maxDif,avg);
         
         
         RoomData.avgRoomAdd(1);
         if (TestMode) {
-            // speedroom = Statsgame.Getspeed();
+            
             Statsgame.Setspeed(speedroom);
             Statsgame.SetTestMode(true);
         }
@@ -27,7 +31,7 @@ public class Generationroom : MonoBehaviour {
             Statsgame.SetTestMode(false);
         }
         
-        // i = 1;
+        
         
 	}
 
@@ -70,26 +74,8 @@ public class Generationroom : MonoBehaviour {
 }
 
 static class RoomData {
-    static int[] dif1 = 
-    {1};
-    static int[] dif2 = 
-    {2};
-    static int[] dif3 = 
-    {3};
-    static int[] dif4 = 
-    {4};
-    static int[] dif5 = 
-    {5};
-    static int[] dif6 = 
-    {6};
-    static int[] dif7 = 
-    {7};
-    static int[] dif8 = 
-    {8};
-    static int[] dif9 = 
-    {9};
-    static int[] dif10 = 
-    {10};
+    static int[] dif={0,3,1,4,1,6,5,8,1,0,0};
+    static int maxDif,minDif;
     static int num = 0;
     static int avgNeed = 5;
     static int sum = 0;
@@ -98,43 +84,18 @@ static class RoomData {
         avgNeed = 0;
         num = 0;
     }
-    static public int[] getArr(int x){
-        switch(x){
-            case 1:
-            return (dif1);
-            case 2:
-            return (dif2);
-            case 3:
-            return (dif3);
-            case 4:
-            return (dif4);
-            case 5:
-            return (dif5);
-            case 6:
-            return (dif6);
-            case 7:
-            return (dif7);
-            case 8:
-            return (dif8);
-            case 9:
-            return (dif9);
-            case 10:
-            return (dif10);
-            default:
-            return(dif1);
-        }
-    }
+    
     static public int getRand(int a, int b){
         int sum = 0;
         for(int i = a; i<=b; i++){
-            sum += getArr(i).Length;
+            sum += dif[i];
             
         }
         int rand = Random.Range(1,sum);
         sum = 0;
         for(int i = a; i<=b; i++){
-            sum += getArr(i).Length;
-            if (rand < sum) return i;
+            sum += dif[i];
+            if (rand <= sum) return i;
         }
         return 10;
     }
@@ -144,29 +105,34 @@ static class RoomData {
     }
     static public int avgRoomGet(){
         avg = (double)sum / num;
-        if (avg > avgNeed){Debug.Log("+"); return(getRand(1, avgNeed));} else{Debug.Log("-");
-        return(getRand(avgNeed,10));}
+        if (avg > avgNeed){ return(getRand(minDif, avgNeed));} else{
+        return(getRand(avgNeed,maxDif));}
     }
     static public string getRoom(){
         int room = avgRoomGet();
         avgRoomAdd(room);
         Debug.Log(avg+" "+room);
-        return convertNum(getArr(room)[Random.Range(0,dif1.Length)]);
+        return convertNum(room,Random.Range(1,dif[room]+1));
     }
     
-    static public string convertNum(int num ){
+    static public string convertNum(int diff, int num ){
         int i=1;
         int nums=num;
         while (nums/10>=1){
             i++;
             nums/=10;
         }
-        string ret="room-";
+        string zero="room-";
         for (int j=0;j<4-i;j++){
-            ret+="0";
+            zero+="0";
         }
         
-        return ret+num.ToString();
+        return "Dif"+diff+"/"+zero+num;
     }
 
+static public void Setdif(int a,int b,int setavg){
+avgNeed=setavg;
+minDif=a;
+maxDif=b;
+}
 }
