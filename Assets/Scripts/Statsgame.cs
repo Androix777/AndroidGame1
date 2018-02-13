@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Statsgame  {
-    private static float speed=0f,score,money;
+    private static float speed=0f,score,money,saveSpeed;
     private static int avg=-1,maxdif=-1,mindif=-1;
     static bool TestMode;
 
@@ -25,4 +25,12 @@ public static class Statsgame  {
     public static void Setmaxdif(float s) { maxdif = (int)s; }
      public static int Getavg() { return avg; }
     public static void Setavg(float s) { avg = (int)s; }
+
+    public static void ResetSpeed(){
+        speed=saveSpeed;
+    }
+    public static void SetSaveSpeed(float s){
+        saveSpeed=s;
+        
+    }
 }

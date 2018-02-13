@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartGame : MonoBehaviour {
+public class UIManager : MonoBehaviour {
     public int maxstartspeed;
     public GameObject write;
 	// Use this for initialization
@@ -14,11 +14,14 @@ public class StartGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        write.GetComponent<Text>().text=gameObject.GetComponent<Slider>().value * maxstartspeed+" ";
+        if (write!=null){
+        write.GetComponent<Text>().text=(int)(gameObject.GetComponent<Slider>().value * maxstartspeed)+" ";}
 
     }
     public void Startgame() {
+
         //Statsgame.Setspeed (gameObject.GetComponent<Slider>().value * maxstartspeed);
+        //Statsgame.SetSaveSpeed (gameObject.GetComponent<Slider>().value * maxstartspeed);
 
         Statsgame.Setavg(gameObject.GetComponent<Slider>().value * maxstartspeed);
         Statsgame.Setmindif(gameObject.GetComponent<Slider>().value * maxstartspeed);
@@ -28,4 +31,15 @@ public class StartGame : MonoBehaviour {
        
 
     }
+    public void Restart (){
+        Statsgame.ResetSpeed();
+        SceneManager.LoadScene(1);
+
+    }
+     public void MoveToMenu (){
+        
+        SceneManager.LoadScene(0);
+
+    }
+
 }

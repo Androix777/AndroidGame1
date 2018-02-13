@@ -73,6 +73,8 @@ public class Generationroom : MonoBehaviour {
             Statsgame.Setspeed(0);       
     }
 
+
+
 }
 
 static class RoomData {

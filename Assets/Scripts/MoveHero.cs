@@ -8,7 +8,7 @@ public class MoveHero : MonoBehaviour {
     public float speed,dist,second;
     private int s;
     private Vector3 newPosition,undoposition;
-    public GameObject UI,tail,explosion;
+    public GameObject UI,uimeny,tail,explosion;
     private string st;
     GradientAlphaKey[] tails;
     bool blocked = true;
@@ -81,7 +81,7 @@ public class MoveHero : MonoBehaviour {
     {
         
         Statsgame.Setscore(0);
-     SceneManager.LoadScene(0);
+     uimeny.SetActive(true);
 
     }
     void Newgradtail()
