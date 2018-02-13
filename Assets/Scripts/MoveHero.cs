@@ -10,14 +10,12 @@ public class MoveHero : MonoBehaviour {
     private Vector3 newPosition,undoposition;
     public GameObject UI,uimeny,tail,explosion;
     private string st;
-    GradientAlphaKey[] tails;
-    bool blocked = true;
+    bool blocked = true,move=false;
     RaycastHit2D hit;
     bool dead;
     void Start () {
         newPosition = transform.position;
-        Gradient g = tail.GetComponent<LineRenderer>().colorGradient;
-        tails = g.alphaKeys;
+        //Gradient g = tail.GetComponent<LineRenderer>().colorGradient;  
         DOTween.Init();
     }
     private void Update()
@@ -31,7 +29,7 @@ public class MoveHero : MonoBehaviour {
             newPosition = Camera.main.ScreenToWorldPoint(touchPosition);
             newPosition = new Vector3(newPosition.x, newPosition.y, 0);
             undoposition = gameObject.transform.position;
-            Backalpha();
+            move=true;
            
         }
         if (Input.GetKeyDown(KeyCode.Mouse0)& blocked)
@@ -40,7 +38,7 @@ public class MoveHero : MonoBehaviour {
             newPosition = Camera.main.ScreenToWorldPoint(MousePos);
             newPosition = new Vector3(newPosition.x, newPosition.y, 0);
             undoposition = gameObject.transform.position;
-            Backalpha();
+            move=true;
             
 
         }
@@ -59,11 +57,16 @@ public class MoveHero : MonoBehaviour {
          else
          {
             transform.DOLocalMove(newPosition, 300).SetSpeedBased().SetEase(Ease.Linear);
-           
+            if (move)
+            {
+                GameObject t=Instantiate(tail,newPosition,transform.rotation);
+                t.GetComponent<Tail>().setTail(newPosition,undoposition);
+                t.SetActive(true);
+                s = Input.touchCount;
+                move=false;
+            }
         }
-        tail.GetComponent<LineRenderer>().SetPosition(1, transform.position);
-        tail.GetComponent<LineRenderer>().SetPosition(0, undoposition);
-        s = Input.touchCount;
+       
     }
     // Update is called once per frame
     void FixedUpdate() {
@@ -72,32 +75,14 @@ public class MoveHero : MonoBehaviour {
         newPosition=new Vector3(newPosition.x - (1* Statsgame.Getspeed() * Time.deltaTime),newPosition.y,0);
         undoposition= new Vector3(undoposition.x - (1 * Statsgame.Getspeed() * Time.deltaTime), undoposition.y, 0);
        
-        Newgradtail();
-
-        
     }
 
     private void OnDestroy()
     {
         
         Statsgame.Setscore(0);
-     uimeny.SetActive(true);
+        uimeny.SetActive(true);//!
 
-    }
-    void Newgradtail()
-    {
-        Gradient g = tail.GetComponent<LineRenderer>().colorGradient;
-        GradientAlphaKey[] alh = g.alphaKeys;
-        for (int i=0;i<alh.Length;i++) {
-            alh[i].alpha = alh[i].alpha - 0.01f;
-        }
-        g.alphaKeys = alh;       
-        tail.GetComponent<LineRenderer>().colorGradient = g;
-    }
-    void Backalpha() {
-        Gradient g = tail.GetComponent<LineRenderer>().colorGradient;
-        g.alphaKeys = tails;
-        tail.GetComponent<LineRenderer>().colorGradient = g;
     }
   public void kill() {
         Instantiate(explosion,transform.position,transform.rotation);
