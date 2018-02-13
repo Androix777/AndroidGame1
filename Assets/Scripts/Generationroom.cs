@@ -13,6 +13,7 @@ public class Generationroom : MonoBehaviour {
     GameObject Lastrom;
 	// Use this for initialization
 	void Awake () {
+        RoomData.avgReset();
         if (Statsgame.Getavg()!=-1){avg=Statsgame.Getavg();}
         if (Statsgame.Getmindif()!=-1){minDif=Statsgame.Getmindif();}
         if (Statsgame.Getmaxdif()!=-1){maxDif=Statsgame.Getmaxdif();}
@@ -26,7 +27,7 @@ public class Generationroom : MonoBehaviour {
             Statsgame.SetTestMode(true);
         }
         else { Createroom("Random");
-            if (Statsgame.Getspeed() == 1) { Statsgame.Setspeed(speedroom); }
+            if (Statsgame.Getspeed() == 0) { Statsgame.Setspeed(speedroom); }
             else { speedroom = Statsgame.Getspeed(); }
             Statsgame.SetTestMode(false);
         }
@@ -39,7 +40,7 @@ public class Generationroom : MonoBehaviour {
     {
 		speedroom = speedroom + speedup;
 		Statsgame.Setscore(Statsgame.Getscore()+speedroom/10);
-		Statsgame.Setspeed(speedroom);
+		
     }
     
     
@@ -68,7 +69,8 @@ public class Generationroom : MonoBehaviour {
     public void StopAll(){           
             speedroom = 0;
             speedup = 0;
-            DOTween.Pause("It is a trap");         
+            DOTween.Pause("It is a trap");  
+            Statsgame.Setspeed(0);       
     }
 
 }
@@ -83,6 +85,8 @@ static class RoomData {
     static public void avgReset(){
         avgNeed = 0;
         num = 0;
+        sum=0;
+        avg=0;
     }
     
     static public int getRand(int a, int b){

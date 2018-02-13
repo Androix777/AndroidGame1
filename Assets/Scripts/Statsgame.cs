@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Statsgame  {
-    private static float speed=1f,score,money;
+    private static float speed=0f,score,money;
     private static int avg=-1,maxdif=-1,mindif=-1;
     static bool TestMode;
 
