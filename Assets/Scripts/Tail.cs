@@ -51,10 +51,27 @@ public class Tail : MonoBehaviour {
         start=starts;
         st=true;
         end=ends;
+        
+        transform.rotation = Quaternion.Euler(0,0,SetDirRot(Vector3.Normalize(end-start)));
 
       
        // force=force*Vector3.Distance(start,end);
 
     }
     
+     public static float Angle(Vector3 start, Vector3 end)
+    {
+        float angle = Mathf.Atan2(end.y - start.y, end.x - start.x) * 180 / Mathf.PI;
+        if (0.0f > angle)
+            angle += 360.0f;
+        return angle;
+    }
+
+    float SetDirRot(Vector3 to)
+    {
+        Vector3 heading = to ;
+        Vector3 direction = heading / heading.magnitude;
+        float angle = Angle(Vector3.zero, heading);
+        return angle - 180;
+    }
 }
