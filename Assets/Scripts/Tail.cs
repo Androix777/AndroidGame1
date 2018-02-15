@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tail : MonoBehaviour {
     bool st=false;
     Vector3 start,end;
-    public float force;
+    public float startSpeedMod,startlifeTimeMod,simulationSpeedMod;
     public ParticleSystem ps;
 	// Use this for initialization
 	void Start () {
@@ -13,8 +13,8 @@ public class Tail : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	/*void Update ()
-    {if (st){
+	void Update (){
+    /*{if (st){
         
         ParticleSystem.EmissionModule emission=ps.emission;
         ParticleSystem.MainModule main= ps.main;
@@ -37,8 +37,8 @@ public class Tail : MonoBehaviour {
         particles[i] = particle;
     }
     ps.SetParticles(particles,particles.Length);
-    }
-	}*/
+    }*/
+	}
     private void FixedUpdate()
     {
         if (!Statsgame.GetTestMode())
@@ -54,7 +54,16 @@ public class Tail : MonoBehaviour {
         
         transform.rotation = Quaternion.Euler(0,0,SetDirRot(Vector3.Normalize(end-start)));
 
-      
+        
+        ParticleSystem.EmissionModule emission=ps.emission;
+        ParticleSystem.MainModule main= ps.main;
+        
+
+        
+        main.startSpeed=startSpeedMod*Vector3.Distance(start,end);
+        main.startLifetime=startlifeTimeMod*Vector3.Distance(start,end);
+        main.simulationSpeed=simulationSpeedMod*Vector3.Distance(start,end);
+
        // force=force*Vector3.Distance(start,end);
 
     }
@@ -73,5 +82,8 @@ public class Tail : MonoBehaviour {
         Vector3 direction = heading / heading.magnitude;
         float angle = Angle(Vector3.zero, heading);
         return angle - 180;
+
+
+
     }
 }
