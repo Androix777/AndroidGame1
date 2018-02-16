@@ -59,8 +59,8 @@ public class MoveHero : MonoBehaviour {
             transform.DOLocalMove(newPosition, 300).SetSpeedBased().SetEase(Ease.Linear);
             if (move)
             {
-                GameObject t=Instantiate(tail,newPosition,transform.rotation);
-                t.GetComponent<Tail>().setTail(newPosition,undoposition);
+                GameObject t=Instantiate(tail,undoposition,transform.rotation);
+                t.GetComponent<Tail>().setTail(undoposition,newPosition);
                 t.SetActive(true);
                 s = Input.touchCount;
                 move=false;

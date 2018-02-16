@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tail : MonoBehaviour {
     bool st=false;
     Vector3 start,end;
-    public float startSpeedMod,startlifeTimeMod,simulationSpeedMod;
+    public float mod1,timeSpeed;
     public ParticleSystem ps;
 	// Use this for initialization
 	void Start () {
@@ -58,11 +58,10 @@ public class Tail : MonoBehaviour {
         ParticleSystem.EmissionModule emission=ps.emission;
         ParticleSystem.MainModule main= ps.main;
         
-
         
-        main.startSpeed=startSpeedMod*Vector3.Distance(start,end);
-        main.startLifetime=startlifeTimeMod*Vector3.Distance(start,end);
-        main.simulationSpeed=simulationSpeedMod*Vector3.Distance(start,end);
+        main.startSpeed=(float)Mathf.Sqrt(mod1*Vector3.Distance(start,end)/timeSpeed);
+        main.startLifetime=(float)Mathf.Sqrt(mod1*Vector3.Distance(start,end)*timeSpeed);
+        //main.simulationSpeed=simulationSpeedMod*Vector3.Distance(start,end);
 
        // force=force*Vector3.Distance(start,end);
 
