@@ -24,9 +24,7 @@ public class Moveroom : MonoBehaviour {
         if (!Statsgame.GetTestMode())
         {
             if (transform.position.x <= 25 & b) { gener.GetComponent<Generationroom>().Createroom(nextroom); b = false; }
-        if (transform.position.x <= -60f) { Destroy(gameObject, 0); }      
-        speedget = Statsgame.Getspeed();
-        speed = Vector3.left.x * Statsgame.Getspeed() * Time.deltaTime;
+        if (transform.position.x <= -60f) { Destroy(gameObject, 0); }            
         transform.Translate(Vector3.left * Statsgame.Getspeed() * Time.deltaTime,Space.World); }
     }
     
