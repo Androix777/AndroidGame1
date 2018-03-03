@@ -14,6 +14,7 @@ public class Generationroom : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         RoomData.avgReset();
+        
         if (Statsgame.Getavg()!=-1){avg=Statsgame.Getavg();}
         if (Statsgame.Getmindif()!=-1){minDif=Statsgame.Getmindif();}
         if (Statsgame.Getmaxdif()!=-1){maxDif=Statsgame.Getmaxdif();}
@@ -78,7 +79,7 @@ public class Generationroom : MonoBehaviour {
 }
 
 static class RoomData {
-    static int[] dif={0,3,1,4,1,6,5,8,1,0,0};
+    static int[] dif={2,3,1,6,4,11,8,11,2,0,0};
     static int maxDif,minDif;
     static int num = 0;
     static int avgNeed = 5;

@@ -7,6 +7,11 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
     public int maxstartspeed;
     public GameObject write;
+
+    public int avg,mindif,maxdif;
+    public float speed;
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -19,13 +24,22 @@ public class UIManager : MonoBehaviour {
 
     }
     public void Startgame() {
+        Statsgame.Setspeed(speed);
+        Statsgame.SetSaveSpeed(speed);
+        Statsgame.Setavg(avg);
+        Statsgame.Setmindif(mindif);
+        Statsgame.Setmaxdif(maxdif);
+
+
+
+
 
         //Statsgame.Setspeed (gameObject.GetComponent<Slider>().value * maxstartspeed);
         //Statsgame.SetSaveSpeed (gameObject.GetComponent<Slider>().value * maxstartspeed);
 
-        Statsgame.Setavg(gameObject.GetComponent<Slider>().value * maxstartspeed);
-        Statsgame.Setmindif(gameObject.GetComponent<Slider>().value * maxstartspeed);
-        Statsgame.Setmaxdif(gameObject.GetComponent<Slider>().value * maxstartspeed);
+       // Statsgame.Setavg(gameObject.GetComponent<Slider>().value * maxstartspeed);
+       // Statsgame.Setmindif(gameObject.GetComponent<Slider>().value * maxstartspeed);
+       // Statsgame.Setmindif(gameObject.GetComponent<Slider>().value * maxstartspeed);
 
         SceneManager.LoadScene(1);
        
