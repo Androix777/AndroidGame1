@@ -23,8 +23,9 @@ public class MoveHero : MonoBehaviour {
         
     
         if (UI != null) { UI.GetComponent<Text>().text = "" + Statsgame.Getscore(); }
-        if (s < Input.touchCount& blocked)
+        if (s < Input.touchCount & blocked)
         {
+            Input.
             Vector3 touchPosition = new Vector3(Input.GetTouch(Input.touchCount - 1).position.x, Input.GetTouch(Input.touchCount - 1).position.y, 0);
             newPosition = Camera.main.ScreenToWorldPoint(touchPosition);
             newPosition = new Vector3(newPosition.x, newPosition.y, 0);

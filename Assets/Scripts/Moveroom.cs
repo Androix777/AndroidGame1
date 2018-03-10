@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Moveroom : MonoBehaviour {
-    public GameObject gener;
+    public GameObject gener,heros;
     public float speed,speedget;
-    bool b=true;
+    bool b=true,hero=true;
     public string nextroom;
 	// Use this for initialization
 	void Start () {
+        heros=GameObject.FindGameObjectWithTag("Hero");
 
         gener = GameObject.FindGameObjectWithTag("Generator");
         GameObject r = gener.GetComponent<Generationroom>().Lastroomget() ;
@@ -21,6 +22,13 @@ public class Moveroom : MonoBehaviour {
     }
     private void FixedUpdate()
     {
+        if(hero & heros!=null){
+            
+            if(heros.transform.position.x-transform.position.x-10.5>0){
+                Statsgame.Addroom();
+                hero=false;
+            }
+        }
         if (!Statsgame.GetTestMode())
         {
             if (transform.position.x <= 25 & b) { gener.GetComponent<Generationroom>().Createroom(nextroom); b = false; }
