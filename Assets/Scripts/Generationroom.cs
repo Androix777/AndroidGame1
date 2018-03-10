@@ -6,19 +6,20 @@ using DG.Tweening;
 
 public class Generationroom : MonoBehaviour {
     public string[] rooms;
-    public int avg,minDif,maxDif;
-    public float speedroom;
+    public int[] roomad;
+    public int minDif,maxDif;
+    public float speedroom,avg;
     public float speedup;
     public bool TestMode;
     GameObject Lastrom;
 	// Use this for initialization
 	void Awake () {
         RoomData.avgReset();
-        
-        if (Statsgame.Getavg()!=-1){avg=Statsgame.Getavg();}
+        avg=minDif;
+       // if (Statsgame.Getavg()!=-1){avg=Statsgame.Getavg();}
         if (Statsgame.Getmindif()!=-1){minDif=Statsgame.Getmindif();}
         if (Statsgame.Getmaxdif()!=-1){maxDif=Statsgame.Getmaxdif();}
-        RoomData.Setdif(minDif,maxDif,avg);
+        RoomData.Setdif(minDif,maxDif,(maxDif+avg)/2);
         
         
         RoomData.avgRoomAdd(1);
@@ -34,7 +35,7 @@ public class Generationroom : MonoBehaviour {
         }
         
         
-        
+        roomad=new int[maxDif-minDif];
 	}
 
     private void FixedUpdate()
@@ -74,6 +75,9 @@ public class Generationroom : MonoBehaviour {
             Statsgame.Setspeed(0);       
     }
 
+    
+
+
 
 
 }
@@ -82,7 +86,7 @@ static class RoomData {
     static int[] dif={2,3,1,6,4,11,8,11,2,0,0};
     static int maxDif,minDif;
     static int num = 0;
-    static int avgNeed = 5;
+    static float avgNeed = 5;
     static int sum = 0;
     static double avg = 0;
     static public void avgReset(){
@@ -112,13 +116,13 @@ static class RoomData {
     }
     static public int avgRoomGet(){
         avg = (double)sum / num;
-        if (avg > avgNeed){ return(getRand(minDif, avgNeed));} else{
-        return(getRand(avgNeed,maxDif));}
+        if (avg > avgNeed){ return(getRand(minDif, (int)avgNeed));} else{
+        return(getRand((int)avgNeed,maxDif));}
     }
     static public string getRoom(){
         int room = avgRoomGet();
         avgRoomAdd(room);
-        Debug.Log(avg+" "+room);
+        Debug.Log(avg+" "+room+" "+avgNeed);
         return convertNum(room,Random.Range(1,dif[room]+1));
     }
     
@@ -137,7 +141,7 @@ static class RoomData {
         return "Dif"+diff+"/"+zero+num;
     }
 
-static public void Setdif(int a,int b,int setavg){
+static public void Setdif(int a,int b,float setavg){
 avgNeed=setavg;
 minDif=a;
 maxDif=b;

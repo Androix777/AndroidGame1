@@ -24,9 +24,8 @@ public class MoveHero : MonoBehaviour {
     
         if (UI != null) { UI.GetComponent<Text>().text = "" + Statsgame.Getscore(); }
         if (s < Input.touchCount & blocked)
-        {
-            Input.
-            Vector3 touchPosition = new Vector3(Input.GetTouch(Input.touchCount - 1).position.x, Input.GetTouch(Input.touchCount - 1).position.y, 0);
+        {        
+            Vector3 touchPosition = new Vector3(Input.GetTouch(Input.touchCount - 1).position.x , Input.GetTouch(Input.touchCount - 1).position.y, 0);
             newPosition = Camera.main.ScreenToWorldPoint(touchPosition);
             newPosition = new Vector3(newPosition.x, newPosition.y, 0);
             undoposition = gameObject.transform.position;
@@ -81,8 +80,10 @@ public class MoveHero : MonoBehaviour {
     private void OnDestroy()
     {
         
-        Statsgame.Setscore(0);
-        uimeny.SetActive(true);//!
+        //Statsgame.Setscore(0);
+        Statsgame.Addscore();
+        Statsgame.Savehighscores();
+        uimeny.SetActive(true);
 
     }
   public void kill() {
