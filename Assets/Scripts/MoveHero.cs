@@ -72,8 +72,8 @@ public class MoveHero : MonoBehaviour {
     void FixedUpdate() {
        
 
-        newPosition=new Vector3(newPosition.x - (1* Statsgame.Getspeed() * Time.deltaTime),newPosition.y,0);
-        undoposition= new Vector3(undoposition.x - (1 * Statsgame.Getspeed() * Time.deltaTime), undoposition.y, 0);
+        newPosition=new Vector3(newPosition.x ,newPosition.y- (1* Statsgame.Getspeed() * Time.deltaTime),0);
+        undoposition= new Vector3(undoposition.x , undoposition.y- (1 * Statsgame.Getspeed() * Time.deltaTime), 0);
        
     }
 
@@ -84,7 +84,7 @@ public class MoveHero : MonoBehaviour {
         Statsgame.Addscore();
         Statsgame.Savehighscores();
         uimeny.SetActive(true);
-
+        
     }
   public void kill() {
         Instantiate(explosion,transform.position,transform.rotation);

@@ -1,26 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.IO;
 
 public static class Statsgame  {
     //static List <int> Highscores;
     static int maxscorehard=0,maxscroreeasy=0,maxscorenormal=0,maxscoreunreal=0,diffic;
-    private static float speed=0f,score,money,saveSpeed;
-    private static int maxdif=-1,mindif=-1,room=0;
-    static bool TestMode,Sound;
+    private static float speed=0f,score,saveSpeed;
+    private static int maxdif=-1,mindif=-1,room=0,money=0;
+    static bool TestMode,Sound=true;
 
     public static void SetTestMode (bool TestMod){ TestMode = TestMod; }
     public static bool GetTestMode() { return TestMode; }
-    public static float Getmoney() { return money; }
-    public static void Setmoney(float s) { money = s; }
+    public static int Getmoney() { return money; }
+    public static void Setmoney(int s) { money = s; }
+    public static void Addmoney(int s) { money += s; }
 
     public static float Getspeed() { return speed; }
     public static void Setspeed(float s) { speed = s;}
 
     public static float Getscore() { return score; }
     public static void Setscore(float s) { score = s; }
-
 
      public static int Getmindif() { return mindif; }
     public static void Setmindif(float s) { mindif = (int)s; }
@@ -102,8 +103,28 @@ public static class Statsgame  {
     public static void Setdiffic(int d){
         diffic=d;
     }
+    public static int Getdiffic(){
+        return diffic;
+    }
 
+    public static void Savestat(){
+        
+        string[] str=new string[2];    
+        str[0]=Sound.ToString();
+        str[1]=money.ToString();  
 
+        File.WriteAllLines(Application.persistentDataPath+"/stat.sc",str);
+    }
+    public static void Loadstat(){
+        string[] str=new string[2];     
+        if (File.Exists(Application.persistentDataPath+"/stat.sc"))  {
+        str=File.ReadAllLines(Application.persistentDataPath+"/stat.sc");
+        Sound=Convert.ToBoolean(str[0]);
+        money=int.Parse(str[1]);
+        
+
+        }
+    }
 
 
 

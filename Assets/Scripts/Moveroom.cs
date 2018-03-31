@@ -10,12 +10,13 @@ public class Moveroom : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         heros=GameObject.FindGameObjectWithTag("Hero");
+        transform.rotation=Quaternion.Euler(transform.eulerAngles.x,transform.eulerAngles.y,90);
 
         gener = GameObject.FindGameObjectWithTag("Generator");
         GameObject r = gener.GetComponent<Generationroom>().Lastroomget() ;
        if (r != null)
         {
-            transform.position = r.transform.position + new Vector3(28,0, 0);
+            transform.position = r.transform.position + new Vector3(0,28, 0);
 
         }
         gener.GetComponent<Generationroom>().Lastroomset(gameObject);
@@ -24,16 +25,16 @@ public class Moveroom : MonoBehaviour {
     {
         if(hero & heros!=null){
             
-            if(heros.transform.position.x-transform.position.x-10.5>0){
+            if(heros.transform.position.y-transform.position.y-10.5>0){
                 Statsgame.Addroom();
                 hero=false;
             }
         }
         if (!Statsgame.GetTestMode())
         {
-            if (transform.position.x <= 25 & b) { gener.GetComponent<Generationroom>().Createroom(nextroom); b = false; }
-        if (transform.position.x <= -60f) { Destroy(gameObject, 0); }            
-        transform.Translate(Vector3.left * Statsgame.Getspeed() * Time.deltaTime,Space.World); }
+            if (transform.position.y <= 25 & b) { gener.GetComponent<Generationroom>().Createroom(nextroom); b = false; }
+        if (transform.position.y <= -60f) { Destroy(gameObject, 0); }            
+        transform.Translate(Vector3.down * Statsgame.Getspeed() * Time.deltaTime,Space.World); }
     }
     
 }

@@ -43,8 +43,8 @@ public class Tail : MonoBehaviour {
     {
         if (!Statsgame.GetTestMode())
         {      
-        if (transform.position.x <= -60f) { Destroy(gameObject, 0); }      
-        transform.Translate(Vector3.left * Statsgame.Getspeed() * Time.deltaTime,Space.World); }
+        if (transform.position.y <= -60f) { Destroy(gameObject, 0); }      
+        transform.Translate(Vector3.down * Statsgame.Getspeed() * Time.deltaTime,Space.World); }
     }
 
     public void setTail (Vector3 starts , Vector3 ends){
@@ -53,6 +53,7 @@ public class Tail : MonoBehaviour {
         end=ends;
         
         transform.rotation = Quaternion.Euler(0,0,SetDirRot(Vector3.Normalize(end-start)));
+        Debug.Log(SetDirRot(Vector3.Normalize(end-start)));
 
         
         ParticleSystem.EmissionModule emission=ps.emission;
@@ -80,7 +81,7 @@ public class Tail : MonoBehaviour {
         Vector3 heading = to ;
         Vector3 direction = heading / heading.magnitude;
         float angle = Angle(Vector3.zero, heading);
-        return angle - 180;
+        return angle+90;
 
 
 

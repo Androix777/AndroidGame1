@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 9368f32b5df40df458b30a321011c0d5
+timeCreated: 1522433237
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Mangano-Clean
+  fontNames:
+  - Mangano-Clean
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
