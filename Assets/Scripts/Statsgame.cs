@@ -10,7 +10,27 @@ public static class Statsgame  {
     private static float speed=0f,score,saveSpeed;
     private static int maxdif=-1,mindif=-1,room=0,money=0;
     static bool TestMode,Sound=true;
+    private static bool[] skins=new bool[5];
+    private static GameObject[] heros=new GameObject[1];
+    private static int numHero;
+    
+    public static int Getnumhero(){
+        return numHero;
+    }
+    public static GameObject Gethero(){
+        return heros[numHero];
+    }
 
+    public static void Sethero (int number){
+        numHero=number;
+    }
+
+    public static bool GetSkin (int number){
+        return skins[number];
+    }
+    public static void Addskin (int number){
+        skins[number]=true;
+    }
     public static void SetTestMode (bool TestMod){ TestMode = TestMod; }
     public static bool GetTestMode() { return TestMode; }
     public static int Getmoney() { return money; }
