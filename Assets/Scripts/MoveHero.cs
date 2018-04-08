@@ -15,7 +15,10 @@ public class MoveHero : MonoBehaviour {
     bool dead;
     void Start () {
         newPosition = transform.position;
-        //Gradient g = tail.GetComponent<LineRenderer>().colorGradient;  
+        GameObject g = Instantiate(Resources.Load("Heros/" + Statsgame.Gethero()),transform.position,transform.rotation) as GameObject;
+        g.transform.SetParent(gameObject.transform);
+        tail=g.transform.GetChild(0).gameObject;
+        explosion = g.transform.GetChild(1).gameObject; 
         DOTween.Init();
     }
     private void Update()
@@ -87,7 +90,8 @@ public class MoveHero : MonoBehaviour {
         
     }
   public void kill() {
-        Instantiate(explosion,transform.position,transform.rotation);
+        GameObject exp= Instantiate(explosion,transform.position,transform.rotation);
+        exp.SetActive(true);
         GameObject g = GameObject.FindGameObjectWithTag("Generator");
         g.GetComponent<Generationroom>().StopAll();    
     }

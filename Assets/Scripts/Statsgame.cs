@@ -8,21 +8,21 @@ public static class Statsgame  {
     //static List <int> Highscores;
     static int maxscorehard=0,maxscroreeasy=0,maxscorenormal=0,maxscoreunreal=0,diffic;
     private static float speed=0f,score,saveSpeed;
-    private static int maxdif=-1,mindif=-1,room=0,money=0;
+    private static int maxdif=-1,mindif=-1,room=0,money=100;
     static bool TestMode,Sound=true;
-    private static bool[] skins=new bool[5];
-    private static GameObject[] heros=new GameObject[1];
-    private static int numHero;
+    private static bool[] skins= {true,false,false,false,false};    
+    private static int dead,usenum;
+
+    private static int[,,] Deadmatrix;
+    private static int[,,] Okmatrix;
     
-    public static int Getnumhero(){
-        return numHero;
-    }
-    public static GameObject Gethero(){
-        return heros[numHero];
+
+    public static int Gethero(){
+       return usenum;
     }
 
-    public static void Sethero (int number){
-        numHero=number;
+    public static void Sethero ( int num){
+        usenum = num;
     }
 
     public static bool GetSkin (int number){
@@ -129,19 +129,30 @@ public static class Statsgame  {
 
     public static void Savestat(){
         
-        string[] str=new string[2];    
+        string[] str=new string[3 + skins.Length];    
         str[0]=Sound.ToString();
-        str[1]=money.ToString();  
+        str[1]=money.ToString();
+        str[2] = usenum.ToString();
+        for (int i = 3; i < 3 + skins.Length; i++)
+        {          
+                str[i] = skins[i-3].ToString();
+        }
 
         File.WriteAllLines(Application.persistentDataPath+"/stat.sc",str);
     }
     public static void Loadstat(){
-        string[] str=new string[2];     
+        
+        string[] str;     
         if (File.Exists(Application.persistentDataPath+"/stat.sc"))  {
         str=File.ReadAllLines(Application.persistentDataPath+"/stat.sc");
         Sound=Convert.ToBoolean(str[0]);
         money=int.Parse(str[1]);
-        
+        usenum= int.Parse(str[2]);
+            for (int i=3;i< str.Length; i++)
+            {
+                Debug.Log(i + " " + skins.Length + " " + str.Length);
+                skins[i - 3] = Convert.ToBoolean(str[i]);
+            }
 
         }
     }

@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour {
     public int maxstartspeed,difficult;
-    public GameObject roomst,roomup ,draw,soundon,soundoff,sound,uidif,uidifdraw;
+    public GameObject roomst,roomup ,draw,soundon,soundoff,sound,uidif,uidifdraw,drawscore;
     public GameObject[] background;
     public AudioClip stings;
     public AudioSource stingSource;
@@ -46,14 +46,17 @@ public class UIManager : MonoBehaviour {
                 GameObject s = GameObject.FindGameObjectWithTag("Sound");
                 stingSource = s.GetComponent<AudioSource>();
             }
-        }   
+        }
+        Drawrecord();
     }
 
 
 	// Use this for initialization
 	void Start () {
+        Drawrecord();
         if (roomst!=null){if (Statsgame.Getroom()==0){roomst.GetComponent<Text>().text="LOL";}
-        else{roomst.GetComponent<Text>().text=Statsgame.Getroom()+"";} 
+        else{roomst.GetComponent<Text>().text=Statsgame.Getroom()+"";}
+        
     }
 
     if ((soundon!=null) & (soundoff!=null)){
@@ -67,8 +70,9 @@ public class UIManager : MonoBehaviour {
                 soundon.SetActive(false);
             } 
         }
-    
-	}
+        
+
+}
 	
 	// Update is called once per frame
 	void Update () {
@@ -133,11 +137,11 @@ void PlaySting()
             
 
         {
-            
             uinum--;
             Setdiffic();
             Drawdiffic();
             Drawbackground();
+            Drawrecord();
         }
         
     }
@@ -149,6 +153,7 @@ void PlaySting()
             Setdiffic();
             Drawdiffic();
             Drawbackground();
+            Drawrecord();
         }
         
     }
@@ -211,6 +216,19 @@ void PlaySting()
         }
         background[uinum].SetActive(true);
     }
+
+    private void Drawrecord()
+    {
+        if (drawscore != null)
+        {
+
+        drawscore.GetComponent<Text>().text = Statsgame.Gethighscore()[difficult]+"";        
+        
+        }
+        
+    }
+
+
 
 
 }
