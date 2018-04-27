@@ -10,7 +10,7 @@ public class Moveroom : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         heros=GameObject.FindGameObjectWithTag("Hero");
-        transform.rotation=Quaternion.Euler(transform.eulerAngles.x,transform.eulerAngles.y,90);
+        //transform.rotation=Quaternion.Euler(transform.eulerAngles.x,transform.eulerAngles.y,90);
 
         gener = GameObject.FindGameObjectWithTag("Generator");
         GameObject r = gener.GetComponent<Generationroom>().Lastroomget() ;

@@ -53,7 +53,7 @@ public class Tail : MonoBehaviour {
         end=ends;
         
         transform.rotation = Quaternion.Euler(0,0,SetDirRot(Vector3.Normalize(end-start)));
-        Debug.Log(SetDirRot(Vector3.Normalize(end-start)));
+        //Debug.Log(SetDirRot(Vector3.Normalize(end-start)));
 
         
         ParticleSystem.EmissionModule emission=ps.emission;

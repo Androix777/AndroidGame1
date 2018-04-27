@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour {
     public int maxstartspeed,difficult;
-    public GameObject roomst,roomup ,draw,soundon,soundoff,sound,uidif,uidifdraw,drawscore;
+    public GameObject roomst,roomup ,draw,soundon,soundoff,sound,uidif,uidifdraw,drawscore,money,moneyadd;
     public GameObject[] background;
     public AudioClip stings;
     public AudioSource stingSource;
@@ -50,14 +50,18 @@ public class UIManager : MonoBehaviour {
         Drawrecord();
     }
 
-
-	// Use this for initialization
-	void Start () {
+    int imnum=0, madd=0;
+    // Use this for initialization
+    void Start () {
+        if (moneyadd != null)
+        {
+            madd= Statsgame.Moneypostgame();
+        }
         Drawrecord();
-        if (roomst!=null){if (Statsgame.Getroom()==0){roomst.GetComponent<Text>().text="LOL";}
-        else{roomst.GetComponent<Text>().text=Statsgame.Getroom()+"";}
-        
-    }
+        if (roomst!=null){if (Statsgame.Getroom()==0){roomst.GetComponent<Text>().text="LOL";roomst.SetActive(true); }
+        else{roomst.GetComponent<Text>().text=Statsgame.Getroom()+""; roomst.SetActive(true); }
+
+        }
 
     if ((soundon!=null) & (soundoff!=null)){
 
@@ -73,16 +77,22 @@ public class UIManager : MonoBehaviour {
         
 
 }
-	
-	// Update is called once per frame
+
+   
 	void Update () {
+        if (moneyadd != null) {
+            moneyadd.GetComponent<Text>().text = madd + "";
+            moneyadd.SetActive(true);
+        
+    }
        if (roomup!=null){
         roomup.GetComponent<Text>().text=Statsgame.Getroom()+"";}
 
         if (draw!=null){Drawbestscore();}
-
+        DrawMoney();
     }
     public void Startgame() {
+        Resources.UnloadUnusedAssets();
         Statsgame.Setdiffic(difficult);
         Statsgame.Setspeed(speed);
         Statsgame.SetSaveSpeed(speed);
@@ -106,7 +116,7 @@ public class UIManager : MonoBehaviour {
 
     public void SetSound(bool s){
         Statsgame.Setsound(s);
-        Statsgame.Savestat();
+        //Statsgame.Savestat();
         if (stingSource!=null){
             if (s){
                 PlaySting();
@@ -117,7 +127,7 @@ public class UIManager : MonoBehaviour {
     }
     public void Drawbestscore(){
         int[] highscore=Statsgame.Gethighscore();
-        if (draw!=null){draw.GetComponent<Text>().text=highscore[Statsgame.Getdiffic()]+"";}
+        if (draw!=null){draw.GetComponent<Text>().text=highscore[Statsgame.Getdiffic()]+"";draw.SetActive(true); }
     }
 
 
@@ -146,7 +156,7 @@ void PlaySting()
         
     }
     public void Leftui() {
-        if (uinum < 3)
+        if (uinum < 5)
         {
             
             uinum++;
@@ -162,27 +172,39 @@ void PlaySting()
         {
             case 0:
                 difficult = 0;
-                mindif = 2;
-                maxdif = 5;
-                speed = 12;
-                break;
-            case 1:
-                difficult = 1;
-                mindif = 4;
+                mindif = 1;
                 maxdif = 7;
                 speed = 18;
                 break;
-            case 2:
-                difficult = 2;
-                mindif = 5;
+            case 1:
+                difficult = 1;
+                mindif = 1;
                 maxdif = 8;
                 speed = 24;
                 break;
+            case 2:
+                difficult = 2;
+                mindif = 2;
+                maxdif = 9;
+                speed = 30;
+                break;
             case 3:
                 difficult = 3;
-                mindif = 4;
+                mindif = 3;
                 maxdif = 10;
-                speed = 30;
+                speed = 36;
+                break;
+            case 4:
+                difficult = 4;
+                mindif = 2;
+                maxdif = 10;
+                speed = 42;
+                break;
+            case 5:
+                difficult = 5;
+                mindif = 0;
+                maxdif = 10;
+                speed = 48;
                 break;
         }
     }
@@ -202,6 +224,12 @@ void PlaySting()
                 s = "Hard";
                 break;
             case 3:
+                s = "Insane";
+                break;
+            case 4:
+                s = "Madness";
+                break;
+            case 5:
                 s = "Unreal";
                 break;
         }
@@ -227,7 +255,16 @@ void PlaySting()
         }
         
     }
+    private void DrawMoney()
+    {
+        if (money != null)
+        {
 
+            money.GetComponent<Text>().text = Statsgame.Getmoney()+ "";
+
+        }
+
+    }
 
 
 

@@ -56,26 +56,50 @@ public class Generationroom : MonoBehaviour {
 		Statsgame.Setscore(Statsgame.Getscore()+speedroom/10);
 		
     }
-    
-    
+
+
     public void Createroom(string room)
-    {if (room != "Random") {
-        
-        GameObject newroom = Instantiate(Resources.Load(room), new Vector3(0, 45, 0), transform.rotation)as GameObject; 
-        
-        
+    {
+        if (room != "Random")
+        {
+
+            GameObject newroom = Instantiate(Resources.Load(room), new Vector3(0, 45, 0), transform.rotation) as GameObject;
+
+
         }
         else
         {
             if (rooms.Length > 0)
-            {int x=0,y=0;
-               GameObject newroom = Instantiate(RoomData.getRoom(ref allrooms), new Vector3(0,45, 0), transform.rotation)as GameObject; 
-            newroom.SetActive(true);
-        if (Random.Range(0,100)>50){x=180;}
-        
-        if (Random.Range(0,100)>50){y=180;}
-        newroom.transform.rotation=Quaternion.Euler(x,y,0);
+            {
+                int x = 0, y = 0;
+                GameObject newroom = Instantiate(RoomData.getRoom(ref allrooms), new Vector3(0, 45, 0), transform.rotation) as GameObject;
+                newroom.SetActive(true);
+                newroom.transform.localEulerAngles = new Vector3(0, 0, 90);
+                if (Random.Range(0, 100) > 50)
+                {
+                    if (Random.Range(0, 100) > 50)
+                    {
+                        newroom.transform.localRotation = Quaternion.Euler(180, 180, 90);
+                    }
+                    else
+                    {
+                        newroom.transform.localRotation = Quaternion.Euler(180, 0, 90);
+                    }
                 }
+                else
+                {
+                    if (Random.Range(0, 100) > 50)
+                    {
+                        newroom.transform.localRotation = Quaternion.Euler(0, 180, 90);
+                    }
+                    else
+                    {
+                        newroom.transform.localRotation = Quaternion.Euler(0, 0, 90);
+                    }
+                }
+                //newroom.transform.localRotation= Quaternion.Euler(180,0,0);
+                Debug.Log(newroom.name+" "+ newroom.transform.localEulerAngles); 
+            }
         }
     }
     public void Lastroomset(GameObject r) { Lastrom = r; }
@@ -97,7 +121,7 @@ public class Generationroom : MonoBehaviour {
 
 
 static class RoomData {
-    public static int[] dif={2,5,3,7,8,12,10,12,2,1,1};
+    public static int[] dif={1,5,3,8,9,13,13,13,2,1,1};
     static int maxDif,minDif;
     static int num = 0;
     static float avgNeed = 5;
@@ -138,7 +162,7 @@ static class RoomData {
         int room = avgRoomGet();
         avgRoomAdd(room);
         int r=Random.Range(1,dif[room]+1);
-        Debug.Log(avg+" "+room+" "+avgNeed+" "+r);
+        //Debug.Log(avg+" "+room+" "+avgNeed+" "+r);
 
         return allrooms[room-minDif,r];
     }

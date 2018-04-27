@@ -4,16 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using UnityEngine.Advertisements;
+
 public class MoveHero : MonoBehaviour {
     public float speed,dist,second;
     private int s;
     private Vector3 newPosition,undoposition;
-    public GameObject UI,uimeny,tail,explosion;
+    public GameObject UI,uimeny,tail,explosion,soundDead;
     private string st;
     bool blocked = true,move=false;
     RaycastHit2D hit;
     bool dead;
     void Start () {
+        Advertisement.Initialize("1780013", false);
         newPosition = transform.position;
         GameObject g = Instantiate(Resources.Load("Heros/" + Statsgame.Gethero()),transform.position,transform.rotation) as GameObject;
         g.transform.SetParent(gameObject.transform);
@@ -54,12 +57,14 @@ public class MoveHero : MonoBehaviour {
             GameObject g = GameObject.FindGameObjectWithTag("Generator");
             g.GetComponent<Generationroom>().StopAll();          
             newPosition = hit.point;
-            transform.DOLocalMove(newPosition,300/second).SetSpeedBased().SetEase(Ease.Linear);           
+            transform.position = newPosition;
+            //transform.DOLocalMove(newPosition,300/second).SetSpeedBased().SetEase(Ease.Linear);           
             blocked = false;
         }
          else
          {
-            transform.DOLocalMove(newPosition, 300).SetSpeedBased().SetEase(Ease.Linear);
+            transform.position = newPosition;
+            //transform.DOLocalMove(newPosition, 300).SetSpeedBased().SetEase(Ease.Linear);
             if (move)
             {
                 GameObject t=Instantiate(tail,undoposition,transform.rotation);
@@ -82,14 +87,27 @@ public class MoveHero : MonoBehaviour {
 
     private void OnDestroy()
     {
+        if (Statsgame.Getdead() > 5)
+        {
+            if (Advertisement.IsReady())
+            {
+                Advertisement.Show();
+                Statsgame.Show();
+            }
+        }
         
         //Statsgame.Setscore(0);
         Statsgame.Addscore();
+        //Statsgame.Moneypostgame();
         Statsgame.Savehighscores();
+        Statsgame.Savestat();
         uimeny.SetActive(true);
+       // if (Statsgame.interstitial.IsLoaded()) { Statsgame.interstitial.Show(); Debug.Log("Show"); }
+            
         
     }
   public void kill() {
+        if (Statsgame.Getsound()) { Instantiate(soundDead); }
         GameObject exp= Instantiate(explosion,transform.position,transform.rotation);
         exp.SetActive(true);
         GameObject g = GameObject.FindGameObjectWithTag("Generator");
