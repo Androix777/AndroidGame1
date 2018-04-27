@@ -124,10 +124,7 @@ public static class Statsgame  {
     }
 
     public static void Addscore(){
-        dead += 1;
-        if (dead > 2) { dead = 0;
-        }
-
+       
         if (diffic==0 & maxscroreeasy<room){maxscroreeasy=room;}
         if (diffic==1 & maxscorenormal<room){maxscorenormal=room;}
         if (diffic==2 & maxscorehard<room){maxscorehard=room;}
@@ -136,7 +133,9 @@ public static class Statsgame  {
         if (diffic==5 & maxscoreunreal<room){maxscoreunreal=room;}
         
     }
-
+    public static void AddDead() {
+        dead += 1;
+    }
     public static void Show()
     { dead -= 3; }
     public static int Getdead()
@@ -184,36 +183,16 @@ public static class Statsgame  {
     }
 
     public static int Moneypostgame() {
-        dead++;
         if (room > 0)
         {
             double d = 2;
             int moneyadd = (int)(Math.Round((diffic + 1) / d * Math.Ceiling(Math.Pow(room / 5, Math.Sqrt(Math.Sqrt(room) / 4)))));
             money += moneyadd;
-            Debug.Log("Money " + moneyadd);
-            if (dead > 2)
-            {
-             //   Debug.Log("dead>2");
-             //   request = new AdRequest.Builder().Build();
-              //  interstitial.LoadAd(request);
-               // if (interstitial.IsLoaded()) { Debug.Log("Show"); interstitial.Show(); }
-                dead = 0;
-            }
-           
+            Debug.Log("Money " + moneyadd);           
             return moneyadd;
         }
-
-
         else
         {
-            if (dead > 2)
-            {
-               // Debug.Log("dead>2");
-               // request = new AdRequest.Builder().Build();
-               // interstitial.LoadAd(request);
-            //if (interstitial.IsLoaded()) { Debug.Log("Show"); interstitial.Show(); }
-                dead = 0;
-            }
             return 0;
         }
     }

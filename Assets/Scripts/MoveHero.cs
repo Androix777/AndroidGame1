@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-using UnityEngine.Advertisements;
+
 
 public class MoveHero : MonoBehaviour {
     public float speed,dist,second;
@@ -16,7 +16,6 @@ public class MoveHero : MonoBehaviour {
     RaycastHit2D hit;
     bool dead;
     void Start () {
-        Advertisement.Initialize("1780013", false);
         newPosition = transform.position;
         GameObject g = Instantiate(Resources.Load("Heros/" + Statsgame.Gethero()),transform.position,transform.rotation) as GameObject;
         g.transform.SetParent(gameObject.transform);
@@ -87,14 +86,6 @@ public class MoveHero : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if (Statsgame.Getdead() > 5)
-        {
-            if (Advertisement.IsReady())
-            {
-                Advertisement.Show();
-                Statsgame.Show();
-            }
-        }
         
         //Statsgame.Setscore(0);
         Statsgame.Addscore();
@@ -102,7 +93,6 @@ public class MoveHero : MonoBehaviour {
         Statsgame.Savehighscores();
         Statsgame.Savestat();
         uimeny.SetActive(true);
-       // if (Statsgame.interstitial.IsLoaded()) { Statsgame.interstitial.Show(); Debug.Log("Show"); }
             
         
     }
