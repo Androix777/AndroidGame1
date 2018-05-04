@@ -117,8 +117,8 @@ public static class Statsgame  {
         ret[0]=maxscroreeasy;
         ret[1]=maxscorenormal;
         ret[2]=maxscorehard;
-        ret[3]=maxscoreunreal;
-        ret[4] = maxscoreunreal;
+        ret[3]= maxscoreinsane;
+        ret[4] = maxscoremadness;
         ret[5] = maxscoreunreal;
         return ret;
     }
@@ -128,8 +128,8 @@ public static class Statsgame  {
         if (diffic==0 & maxscroreeasy<room){maxscroreeasy=room;}
         if (diffic==1 & maxscorenormal<room){maxscorenormal=room;}
         if (diffic==2 & maxscorehard<room){maxscorehard=room;}
-        if (diffic==3 & maxscoreinsane<room){maxscoreunreal=room;}
-        if (diffic==4 & maxscoremadness<room){maxscoreunreal=room;}
+        if (diffic==3 & maxscoreinsane<room){ maxscoreinsane = room;}
+        if (diffic==4 & maxscoremadness<room){ maxscoremadness = room;}
         if (diffic==5 & maxscoreunreal<room){maxscoreunreal=room;}
         
     }
@@ -186,7 +186,7 @@ public static class Statsgame  {
         if (room > 0)
         {
             double d = 2;
-            int moneyadd = (int)(Math.Round((diffic + 1) / d * Math.Ceiling(Math.Pow(room / 5, Math.Sqrt(Math.Sqrt(room) / 4)))));
+            int moneyadd = (int)(Math.Round(Math.Pow(Math.Pow((double)room, (double)1 / 6-diffic),0.4*Math.Sqrt(room))));
             money += moneyadd;
             Debug.Log("Money " + moneyadd);           
             return moneyadd;

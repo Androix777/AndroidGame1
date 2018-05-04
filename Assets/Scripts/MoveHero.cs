@@ -24,9 +24,7 @@ public class MoveHero : MonoBehaviour {
         DOTween.Init();
     }
     private void Update()
-    {
-        
-    
+    {            
         if (UI != null) { UI.GetComponent<Text>().text = "" + Statsgame.Getscore(); }
         if (s < Input.touchCount & blocked)
         {        
@@ -56,14 +54,13 @@ public class MoveHero : MonoBehaviour {
             GameObject g = GameObject.FindGameObjectWithTag("Generator");
             g.GetComponent<Generationroom>().StopAll();          
             newPosition = hit.point;
-            transform.position = newPosition;
-            //transform.DOLocalMove(newPosition,300/second).SetSpeedBased().SetEase(Ease.Linear);           
+            transform.position = newPosition;        
             blocked = false;
+            Destroy(gameObject,5);
         }
          else
          {
             transform.position = newPosition;
-            //transform.DOLocalMove(newPosition, 300).SetSpeedBased().SetEase(Ease.Linear);
             if (move)
             {
                 GameObject t=Instantiate(tail,undoposition,transform.rotation);
@@ -73,7 +70,6 @@ public class MoveHero : MonoBehaviour {
                 move=false;
             }
         }
-       
     }
     // Update is called once per frame
     void FixedUpdate() {
@@ -86,21 +82,17 @@ public class MoveHero : MonoBehaviour {
 
     private void OnDestroy()
     {
-        
-        //Statsgame.Setscore(0);
+        if (Statsgame.Getsound()) { Instantiate(soundDead); }
+        GameObject exp = Instantiate(explosion, transform.position, transform.rotation);
+        exp.SetActive(true);
+        GameObject g = GameObject.FindGameObjectWithTag("Generator");
+        g.GetComponent<Generationroom>().StopAll();
         Statsgame.Addscore();
-        //Statsgame.Moneypostgame();
         Statsgame.Savehighscores();
         Statsgame.Savestat();
         uimeny.SetActive(true);
-            
-        
     }
-  public void kill() {
-        if (Statsgame.Getsound()) { Instantiate(soundDead); }
-        GameObject exp= Instantiate(explosion,transform.position,transform.rotation);
-        exp.SetActive(true);
-        GameObject g = GameObject.FindGameObjectWithTag("Generator");
-        g.GetComponent<Generationroom>().StopAll();    
+  public void kill(int deadTime) {
+        Destroy(gameObject,deadTime);    
     }
 }

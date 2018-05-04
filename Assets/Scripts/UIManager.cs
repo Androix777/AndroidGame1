@@ -156,7 +156,7 @@ void PlaySting()
         
     }
     public void Leftui() {
-        if (uinum < 5)
+        if (uinum < 4)
         {
             
             uinum++;

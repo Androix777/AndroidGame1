@@ -62,10 +62,7 @@ public class Generationroom : MonoBehaviour {
     {
         if (room != "Random")
         {
-
             GameObject newroom = Instantiate(Resources.Load(room), new Vector3(0, 45, 0), transform.rotation) as GameObject;
-
-
         }
         else
         {
@@ -98,7 +95,7 @@ public class Generationroom : MonoBehaviour {
                     }
                 }
                 //newroom.transform.localRotation= Quaternion.Euler(180,0,0);
-                Debug.Log(newroom.name+" "+ newroom.transform.localEulerAngles); 
+                //Debug.Log(newroom.name+" "+ newroom.transform.localEulerAngles); 
             }
         }
     }

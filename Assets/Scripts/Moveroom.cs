@@ -35,6 +35,5 @@ public class Moveroom : MonoBehaviour {
             if (transform.position.y <= 25 & b) { gener.GetComponent<Generationroom>().Createroom(nextroom); b = false; }
         if (transform.position.y <= -60f) { Destroy(gameObject, 0); }            
         transform.Translate(Vector3.down * Statsgame.Getspeed() * Time.deltaTime,Space.World); }
-    }
-    
+    }  
 }
