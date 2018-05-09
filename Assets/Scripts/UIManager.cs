@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour {
     public int maxstartspeed,difficult;
-    public GameObject roomst,roomup ,draw,soundon,soundoff,sound,uidif,uidifdraw,drawscore,money,moneyadd;
+    public GameObject roomst,roomup ,draw,soundon,soundoff,sound,uidif,uidifdraw,drawscore,money,moneyadd,errorMessange;
     public GameObject[] background;
     public AudioClip stings;
     public AudioSource stingSource;
@@ -92,14 +92,20 @@ public class UIManager : MonoBehaviour {
         DrawMoney();
     }
     public void Startgame() {
-        Resources.UnloadUnusedAssets();
-        Statsgame.Setdiffic(difficult);
-        Statsgame.Setspeed(speed);
-        Statsgame.SetSaveSpeed(speed);
-        Statsgame.Setmindif(mindif);
-        Statsgame.Setmaxdif(maxdif);
-
-        SceneManager.LoadScene(1);
+            if ((difficult<=2) || (difficult ==3 & Statsgame.Gethighscore()[2]>=20) || (difficult == 4 & Statsgame.Gethighscore()[3] >= 20))
+        {
+            Resources.UnloadUnusedAssets();
+            Statsgame.Setdiffic(difficult);
+            Statsgame.Setspeed(speed);
+            Statsgame.SetSaveSpeed(speed);
+            Statsgame.Setmindif(mindif);
+            Statsgame.Setmaxdif(maxdif);
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            errorMessange.GetComponent<Text>().text = "Score 20 points.";
+        }
        
 
     }
