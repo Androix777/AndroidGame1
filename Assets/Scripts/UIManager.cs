@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour {
     public int maxstartspeed,difficult;
-    public GameObject roomst,roomup ,draw,soundon,soundoff,sound,uidif,uidifdraw,drawscore,money,moneyadd,errorMessange;
+    public GameObject roomst,roomup ,draw,soundon,soundoff,sound,uidif,uidifdraw,drawscore,money,moneyadd,errorMessange,blocked;
     public GameObject[] background;
     public AudioClip stings;
     public AudioSource stingSource;
@@ -149,15 +149,24 @@ void PlaySting()
     }
 
     public void Rightui() {
-        if (uinum > 0)
-            
-
+        if (uinum > 0)         
         {
             uinum--;
-            Setdiffic();
-            Drawdiffic();
+            Setdiffic();           
             Drawbackground();
             Drawrecord();
+            if ((uinum <= 2) || (uinum == 3 & Statsgame.Gethighscore()[2] >= 20) || (uinum == 4 & Statsgame.Gethighscore()[3] >= 20))
+            {
+                uidifdraw.SetActive(true);
+                blocked.SetActive(false);
+                Drawdiffic();
+
+            }else
+            {
+                uidifdraw.SetActive(false);
+                blocked.SetActive(true);
+                Drawdiffic();
+            }
         }
         
     }
@@ -167,9 +176,21 @@ void PlaySting()
             
             uinum++;
             Setdiffic();
-            Drawdiffic();
             Drawbackground();
             Drawrecord();
+            if ((uinum <= 2) || (uinum == 3 & Statsgame.Gethighscore()[2] >= 20) || (uinum == 4 & Statsgame.Gethighscore()[3] >= 20))
+            {
+                uidifdraw.SetActive(true);
+                blocked.SetActive(false);
+                Drawdiffic();
+
+            }
+            else
+            {
+                uidifdraw.SetActive(false);
+                blocked.SetActive(true);
+                Drawdiffic();
+            }
         }
         
     }
