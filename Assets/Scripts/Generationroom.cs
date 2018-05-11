@@ -118,7 +118,7 @@ public class Generationroom : MonoBehaviour {
 
 
 static class RoomData {
-    public static int[] dif={1,5,2,8,10,13,13,13,1,1,1};
+    public static int[] dif={1,5,2,9,13,17,15,13,1,1,1};
     static int maxDif,minDif;
     static int num = 0;
     static float avgNeed = 5;
