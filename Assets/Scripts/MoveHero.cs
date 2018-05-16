@@ -56,7 +56,7 @@ public class MoveHero : MonoBehaviour {
             newPosition = hit.point;
             transform.position = newPosition;        
             blocked = false;
-            Destroy(gameObject,5);
+            Destroy(gameObject,2);
         }
          else
          {
