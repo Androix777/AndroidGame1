@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: dc4a68a0160378f40878bf3aba514114
-timeCreated: 1526030857
+timeCreated: 1527849943
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -76,6 +76,15 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: 47
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+  - buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -98,8 +107,20 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 254, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: -1786.0049, y: 244.99998}
+        - {x: -1786.0049, y: -251.99998}
+        - {x: 1786.0049, y: -251.99998}
+        - {x: 1786.0049, y: 236.24998}
+        - {x: 1765.0342, y: 244.99998}
+      physicsShape:
+      - - {x: -1712.6074, y: 42}
+        - {x: -1728.3354, y: 27.999998}
+        - {x: -1728.3354, y: -42}
+        - {x: 1724.8403, y: -42}
+        - {x: 1726.5879, y: -40.25}
+        - {x: 1726.5879, y: 33.25}
+        - {x: 1724.8403, y: 42}
       tessellationDetail: 0
     outline: []
     physicsShape: []
